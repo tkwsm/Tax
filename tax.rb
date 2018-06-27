@@ -121,6 +121,23 @@ end
 
 if $0 == __FILE__
 
+  if ARGV.size == 0
+    print "\n"
+    print "USAGE: please see the bottom of this script 'tax.rb'. \n"
+    print "USAGE: or do as following\n"
+    print " ruby tax.rb nodes.file names.file \n"
+    print "\n"
+    print "USAGE: If you are using this script on NIG super computer, \n"
+    print " cp /usr/local/db/taxonomy/ncbi-taxonomy/taxdump.tar.gz ./ \n"
+    print " Then, \n"
+    print " gunzip Taxdump.tar.gz \n"
+    print " tar xvf Taxdump.tar.gz \n"
+    print " Then, \n"
+    print " ruby tax.rb nodes.dmp names.dmp \n"
+    print "\n"
+    exit
+  end
+
   nodes_f = open( ARGV.shift )
   names_f = open( ARGV.shift )
 
