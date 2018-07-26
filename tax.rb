@@ -40,19 +40,22 @@ module Node
     end
 
     def step_up_taxtree( taxid )
-      taxid = taxid.to_i
-      tax_path = []
-      rep_level = ["varietas", "species", "genus", "family", "order", "class", "phylum", "kingdom", "superkingdom"]
-      taxtype  = ""
-      until taxtype == "superkingdom" or taxtype == nil
-        parent_taxid = @tax_hash[ taxid ].parent_taxid
-        taxtype      = @tax_hash[ taxid ].taxtype
-        name         = @name_hash[ taxid ].name
-        nametype     = @name_hash[ taxid ].nametype
-        if rep_level.include?(taxtype)
-          tax_path << [ taxid, taxtype, name, nametype ]
+      if taxid == "" or taxid == nil
+      else
+        taxid = taxid.to_i
+        tax_path = []
+        rep_level = ["varietas", "species", "genus", "family", "order", "class", "phylum", "kingdom", "superkingdom"]
+        taxtype  = ""
+        until taxtype == "superkingdom" or taxtype == nil
+          parent_taxid = @tax_hash[ taxid ].parent_taxid
+          taxtype      = @tax_hash[ taxid ].taxtype
+          name         = @name_hash[ taxid ].name
+          nametype     = @name_hash[ taxid ].nametype
+          if rep_level.include?(taxtype)
+            tax_path << [ taxid, taxtype, name, nametype ]
+          end
+          taxid = parent_taxid
         end
-        taxid = parent_taxid
       end
       return tax_path
     end
